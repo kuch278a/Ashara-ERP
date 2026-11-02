@@ -18,6 +18,7 @@ This repository arrived incomplete. The following was reconstructed on 2026-11-0
 | Atelier API | **Refactored** | `routes/api.php` closures → `App\Http\Controllers\Api\V1\*` controllers. |
 | API feature tests | **Added** | `tests/Feature/Api/AtelierApiTest.php` — 5 tests, 14 assertions, passing. |
 | Git baseline | **Committed** | `git init` + first commit of the working tree. |
+| `vite.config.js` | **Restored** | `laravel-vite-plugin` + `@tailwindcss/vite`; `npm run build` succeeds. |
 
 ## Boot blocker — resolved
 
@@ -53,8 +54,8 @@ provides the atelier-specific `api/v1/*` endpoints (currently mock closures — 
 - **L3:** atelier endpoints now use controllers (done). Next: back them with the plugin models
   instead of static data, and add auth (Sanctum) + idempotency.
 - **L4:** SPA data layer (React Query) — done in the frontend (`src/lib/estateApi.js`).
-- Root `package.json` is restored, but `vite.config.js` / `tailwind.config.js` / `postcss.config.js`
-  are still missing (prebuilt `public/build` assets are present, so the app runs without rebuilding).
+- Asset build restored: `vite.config.js` recreated; `npm run build` emits `public/build`
+  (Tailwind v4 is CSS-first — no `tailwind.config.js`, no PostCSS config needed).
 - Some plugin test-helper classes do not comply with PSR-4 (harmless; skipped by the autoloader).
 
 ## Reproduce
