@@ -16,7 +16,8 @@ This repository arrived incomplete. The following was reconstructed on 2026-11-0
 | `phpunit.xml` | **Restored** | Standard config; tests run against Postgres (`ashara_erp`). |
 | `tests/TestBootstrapHelper.php` | **Restored** | `Tests\TestCase` references it; registered via `autoload-dev.files`. |
 | Atelier API | **Refactored** | `routes/api.php` closures → `App\Http\Controllers\Api\V1\*` controllers. |
-| API feature tests | **Added** | `tests/Feature/Api/AtelierApiTest.php` — 5 tests, 14 assertions, passing. |
+| API feature tests | **Added** | `tests/Feature/Api/AtelierApiTest.php` — 6 tests, 15 assertions, passing. |
+| API auth | **Added** | Atelier routes behind `auth:sanctum`; only `/api/v1/health` is public. |
 | Git baseline | **Committed** | `git init` + first commit of the working tree. |
 | `vite.config.js` | **Restored** | `laravel-vite-plugin` + `@tailwindcss/vite`; `npm run build` succeeds. |
 
@@ -51,8 +52,11 @@ provides the atelier-specific `api/v1/*` endpoints (currently mock closures — 
 
 ## Remaining work (feature, not repair)
 
-- **L3:** atelier endpoints now use controllers (done). Next: back them with the plugin models
-  instead of static data, and add auth (Sanctum) + idempotency.
+- **L3:** atelier endpoints use controllers + Sanctum auth (done). Next: back them with the
+  plugin Eloquent models (`Webkul\Partner\Models\Partner`, `Webkul\Product\Models\Product`,
+  `Webkul\Inventory\Models\Warehouse`, `Webkul\Manufacturing\Models\BillOfMaterial` /
+  `WorkOrder`, `Webkul\Purchase\Models\Order`, `Webkul\Account\Models\Account`) and seed the
+  reference data so responses match the SPA contract.
 - **L4:** SPA data layer (React Query) — done in the frontend (`src/lib/estateApi.js`).
 - Asset build restored: `vite.config.js` recreated; `npm run build` emits `public/build`
   (Tailwind v4 is CSS-first — no `tailwind.config.js`, no PostCSS config needed).
