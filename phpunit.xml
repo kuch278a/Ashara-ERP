@@ -2,47 +2,13 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
-         colors="true"
->
+         colors="true">
     <testsuites>
-        <testsuite name="AccountFeature">
-            <directory>plugins/webkul/accounts/tests/Feature</directory>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
         </testsuite>
-        <testsuite name="AccountingFeature">
-            <directory>plugins/webkul/accounting/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="InventoryFeature">
-            <directory>plugins/webkul/inventories/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="SaleFeature">
-            <directory>plugins/webkul/sales/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="PurchaseFeature">
-            <directory>plugins/webkul/purchases/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="ManufacturingFeature">
-            <directory>plugins/webkul/manufacturing/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="PointOfSaleFeature">
-            <directory>plugins/webkul/point-of-sale/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="ProjectFeature">
-            <directory>plugins/webkul/projects/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="PartnerFeature">
-            <directory>plugins/webkul/partners/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="ProductFeature">
-            <directory>plugins/webkul/products/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="SupportFeature">
-            <directory>plugins/webkul/support/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="EmployeeFeature">
-            <directory>plugins/webkul/employees/tests/Feature</directory>
-        </testsuite>
-        <testsuite name="SecurityFeature">
-            <directory>plugins/webkul/security/tests/Feature</directory>
+        <testsuite name="Feature">
+            <directory>tests/Feature</directory>
         </testsuite>
     </testsuites>
     <source>
@@ -52,13 +18,16 @@
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>
-        <env name="APP_MAINTENANCE_DRIVER" value="file"/>
+        <env name="APP_KEY" value="base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="CACHE_STORE" value="array"/>
-        <!-- <env name="DB_CONNECTION" value="sqlite"/> -->
-        <!-- <env name="DB_DATABASE" value=":memory:"/> -->
+        <env name="DB_CONNECTION" value="pgsql"/>
+        <env name="DB_DATABASE" value="ashara_erp"/>
+        <env name="DB_HOST" value="127.0.0.1"/>
+        <env name="DB_PORT" value="5432"/>
+        <env name="DB_USERNAME" value="postgres"/>
+        <env name="DB_PASSWORD" value=""/>
         <env name="MAIL_MAILER" value="array"/>
-        <env name="PULSE_ENABLED" value="false"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
