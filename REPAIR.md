@@ -13,6 +13,11 @@ This repository arrived incomplete. The following was reconstructed on 2026-11-0
 | `.gitignore` | **Added** | Standard Laravel ignores. |
 | `.env.example`, `docker-compose.yml` (Postgres 16) | Added earlier | Database configuration. |
 | `package.json` | **Restored** | Rebuilt from `node_modules` (86 devDependencies) by `scripts/rebuild-package.cjs`. |
+| `phpunit.xml` | **Restored** | Standard config; tests run against Postgres (`ashara_erp`). |
+| `tests/TestBootstrapHelper.php` | **Restored** | `Tests\TestCase` references it; registered via `autoload-dev.files`. |
+| Atelier API | **Refactored** | `routes/api.php` closures → `App\Http\Controllers\Api\V1\*` controllers. |
+| API feature tests | **Added** | `tests/Feature/Api/AtelierApiTest.php` — 5 tests, 14 assertions, passing. |
+| Git baseline | **Committed** | `git init` + first commit of the working tree. |
 
 ## Boot blocker — resolved
 
@@ -45,14 +50,11 @@ provides the atelier-specific `api/v1/*` endpoints (currently mock closures — 
 
 ## Remaining work (feature, not repair)
 
-- **L3:** promote the atelier endpoints in `routes/api.php` from mock closures to controllers/resources
-  backed by the plugin models; add auth (Sanctum) + validation + idempotency.
-- **L4:** SPA data layer (React Query) against those endpoints.
+- **L3:** atelier endpoints now use controllers (done). Next: back them with the plugin models
+  instead of static data, and add auth (Sanctum) + idempotency.
+- **L4:** SPA data layer (React Query) — done in the frontend (`src/lib/estateApi.js`).
 - Root `package.json` is restored, but `vite.config.js` / `tailwind.config.js` / `postcss.config.js`
-  and `resources/css/app.css` / `resources/js/app.js` are still missing (prebuilt `public/build`
-  assets are present, so the app runs without rebuilding).
-- Git: `.git` had no HEAD; `git init` recreated it, but the pre-existing index is inconsistent
-  (large staged-deletion set). Reset before committing: `git rm -r --cached . ; git add . ; git status`.
+  are still missing (prebuilt `public/build` assets are present, so the app runs without rebuilding).
 - Some plugin test-helper classes do not comply with PSR-4 (harmless; skipped by the autoloader).
 
 ## Reproduce
